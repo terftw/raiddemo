@@ -17,7 +17,7 @@ export const getFruitsData = async () => {
       return fruitArr;
     })
     .catch((error) => {
-      console.error(error);
+      throw new Error(error);
     });
 };
 
@@ -31,9 +31,9 @@ export const getOrderHistory = async () => {
         orderHistoryArr.push(value as OrderHistory);
       }
 
-      return orderHistoryArr;
+      return orderHistoryArr.reverse();
     })
     .catch((error) => {
-      console.error(error);
+      throw new Error(error);
     });
 };

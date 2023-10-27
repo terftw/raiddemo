@@ -19,7 +19,7 @@ export const restCreateOrder = async (
     .then(() => {
       setSuccess(true);
     })
-    .catch((error) => {
+    .catch(() => {
       setError(true);
     });
 };
