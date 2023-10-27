@@ -1,4 +1,4 @@
-# [Google Maps + Places Application](https://mighty-beyond-62116.herokuapp.com/)
+# [Fruits POS](https://653baf91852595000879231a--luxury-mermaid-063e77.netlify.app/)
 
 An attempt to address the requirements sent by the RAID team
 [Requirements](https://file.go.gov.sg/ses-swe-homework.pdf)
@@ -17,7 +17,7 @@ An attempt to address the requirements sent by the RAID team
 
 &nbsp;
 
-The demo can be found [here](https://terence-google-maps-demo.netlify.app/)
+The demo can be found [here](https://653baf91852595000879231a--luxury-mermaid-063e77.netlify.app/)
 \
 &nbsp;
 \
