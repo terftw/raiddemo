@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  useLocation,
-} from "react-router-dom";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { ShoppingCartOutlined, ContainerOutlined } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
 import Purchase from "./components/pages/Purchase";

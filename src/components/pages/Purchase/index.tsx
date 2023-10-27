@@ -6,7 +6,6 @@ import {
   Button,
   Typography,
   Divider,
-  Popover,
   Collapse,
   CollapseProps,
 } from "antd";
@@ -73,7 +72,7 @@ const PurchasePage = () => {
         (order) => fruitsData[order.name]
       )
     );
-  }, [value]);
+  }, [value, fruitsData]);
 
   useEffect(() => {
     if (currentOrders) {
