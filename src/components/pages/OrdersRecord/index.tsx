@@ -4,7 +4,6 @@ import { getOrderHistory } from "../../../server/queries";
 import Table, { ColumnsType } from "antd/es/table";
 import { Order, OrderHistory } from "../../../types";
 
-type Props = {};
 const { Title, Text } = Typography;
 
 const columns: ColumnsType<OrderHistory> = [
@@ -24,7 +23,7 @@ const columns: ColumnsType<OrderHistory> = [
   },
 ];
 
-const OrdersRecord = ({}: Props) => {
+const OrdersRecord = () => {
   const [orderHistory, setOrderHistory] = useState<OrderHistory[]>([]);
 
   useEffect(() => {
@@ -68,5 +67,4 @@ const OrdersRecord = ({}: Props) => {
   );
 };
 
-export type { Props };
 export default OrdersRecord;

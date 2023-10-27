@@ -87,7 +87,7 @@ const PurchasePage = () => {
 
       setCurrentOrdersPrice(costOfOrder);
     }
-  }, [currentOrders]);
+  }, [currentOrders, fruitsData]);
 
   useEffect(() => {
     if (purchaseString) setPurchaseIsMade(false);
