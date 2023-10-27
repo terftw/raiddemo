@@ -10,7 +10,7 @@ export const getFruitsData = async () => {
   return axios
     .get(`${databaseURL}/fruits.json`)
     .then((response) => {
-      for (const [_, value] of Object.entries(response.data)) {
+      for (const [, value] of Object.entries(response.data)) {
         fruitArr.push(value as Fruit);
       }
 
@@ -27,7 +27,7 @@ export const getOrderHistory = async () => {
   return axios
     .get(`${databaseURL}/orders.json`)
     .then((response) => {
-      for (const [_, value] of Object.entries(response.data)) {
+      for (const [, value] of Object.entries(response.data)) {
         orderHistoryArr.push(value as OrderHistory);
       }
 
