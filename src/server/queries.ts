@@ -1,25 +1,39 @@
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../server";
 import { Fruit, OrderHistory } from "../types";
+import axios from "axios";
+
+const databaseURL =
+  "https://raiddemo-ee237.asia-southeast1.firebasedatabase.app";
 
 export const getFruitsData = async () => {
-  const querySnapshot = await getDocs(collection(db, "fruits"));
-  const fruits: Fruit[] = [];
+  const fruitArr: Fruit[] = [];
 
-  querySnapshot.forEach((doc) => {
-    fruits.push({ ...doc.data() } as Fruit);
-  });
+  return axios
+    .get(`${databaseURL}/fruits.json`)
+    .then((response) => {
+      for (const [_, value] of Object.entries(response.data)) {
+        fruitArr.push(value as Fruit);
+      }
 
-  return fruits;
+      return fruitArr;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 };
 
 export const getOrderHistory = async () => {
-  const querySnapshot = await getDocs(collection(db, "orders"));
-  const orderHistory: OrderHistory[] = [];
+  const orderHistoryArr: OrderHistory[] = [];
 
-  querySnapshot.forEach((doc) => {
-    orderHistory.push({ ...doc.data() } as OrderHistory);
-  });
+  return axios
+    .get(`${databaseURL}/orders.json`)
+    .then((response) => {
+      for (const [_, value] of Object.entries(response.data)) {
+        orderHistoryArr.push(value as OrderHistory);
+      }
 
-  return orderHistory;
+      return orderHistoryArr;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 };

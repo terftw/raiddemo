@@ -14,7 +14,7 @@ import { ColumnsType } from "antd/es/table";
 import { convertPurchaseStringToOrder } from "../../../helpers/convertPurchaseStringToOrder";
 import { useFruitsContext } from "../../context/FruitsProvider";
 import { Fruit, Order } from "../../../types";
-import { createOrder } from "../../../server/mutations";
+import { restCreateOrder } from "../../../server/mutations";
 import { Link } from "react-router-dom";
 
 const { Title, Text } = Typography;
@@ -37,7 +37,9 @@ const PurchasePage = () => {
   const [purchaseString, setPurchaseString] = useState<string>("");
   const [currentOrders, setCurrentOrders] = useState<Order[]>([]);
   const [currentOrdersPrice, setCurrentOrdersPrice] = useState<number>(0);
-  const [purchaseIsMade, setPurchaseIsMade] = useState(false);
+  const [createOrderSuccess, setCreateOrderSuccess] = useState(false);
+  const [hasCreateOrderError, setHasCreateOrderError] = useState(false);
+
   const { data: fruitsData } = useFruitsContext();
   const [value] = useDebounce(purchaseString, 300);
 
@@ -45,11 +47,15 @@ const PurchasePage = () => {
 
   const onSubmit = useCallback(() => {
     if (currentOrders.length === 0) return;
-    createOrder(currentOrders, currentOrdersPrice);
+    restCreateOrder(
+      currentOrders,
+      currentOrdersPrice,
+      setCreateOrderSuccess,
+      setHasCreateOrderError
+    );
     setPurchaseString("");
     setCurrentOrders([]);
     setCurrentOrdersPrice(0);
-    setPurchaseIsMade(true);
   }, [currentOrders, currentOrdersPrice]);
 
   const items: CollapseProps["items"] = [
@@ -90,7 +96,10 @@ const PurchasePage = () => {
   }, [currentOrders, fruitsData]);
 
   useEffect(() => {
-    if (purchaseString) setPurchaseIsMade(false);
+    if (purchaseString) {
+      setCreateOrderSuccess(false);
+      setHasCreateOrderError(false);
+    }
   }, [purchaseString]);
 
   return (
@@ -119,11 +128,21 @@ const PurchasePage = () => {
         >
           Make a purchase
         </Button>
-        {purchaseIsMade && (
+        {createOrderSuccess ? (
           <div style={{ marginTop: 8, display: "flex", alignItems: "center" }}>
             <Text style={{ marginRight: 8 }}>Your purchase has been made</Text>
             <Link to={"/orderHistory"}>Check order history</Link>
           </div>
+        ) : (
+          hasCreateOrderError && (
+            <div
+              style={{ marginTop: 8, display: "flex", alignItems: "center" }}
+            >
+              <Text style={{ marginRight: 8, color: "red" }}>
+                Encountered an error
+              </Text>
+            </div>
+          )
         )}
       </div>
       <Divider />

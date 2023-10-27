@@ -25,7 +25,7 @@ const FruitsProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     getFruitsData().then((fruits) => {
-      setFruitsData(keyBy(fruits, "name"));
+      if (fruits) setFruitsData(keyBy(fruits, "name"));
     });
   }, []);
 

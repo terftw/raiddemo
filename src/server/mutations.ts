@@ -1,11 +1,25 @@
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../server";
 import { Order } from "../types";
+import axios from "axios";
 
-export const createOrder = async (orders: Order[], cost: number) => {
-  await addDoc(collection(db, "orders"), {
-    timeOfOrder: new Date(),
-    orders,
-    cost,
-  });
+const databaseURL =
+  "https://raiddemo-ee237.asia-southeast1.firebasedatabase.app";
+
+export const restCreateOrder = async (
+  orders: Order[],
+  cost: number,
+  setSuccess: React.Dispatch<React.SetStateAction<boolean>>,
+  setError: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  axios
+    .post(`${databaseURL}/orders.json`, {
+      timeOfOrder: new Date(),
+      orders,
+      cost,
+    })
+    .then(() => {
+      setSuccess(true);
+    })
+    .catch((error) => {
+      setError(true);
+    });
 };

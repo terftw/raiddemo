@@ -12,7 +12,7 @@ const columns: ColumnsType<OrderHistory> = [
     dataIndex: "timeOfOrder",
     key: "time",
     render: (timestamp) => {
-      const date = new Date(timestamp.seconds * 1000).toString();
+      const date = new Date(timestamp).toString();
       return <Text>{date}</Text>;
     },
   },
@@ -28,7 +28,7 @@ const OrdersRecord = () => {
 
   useEffect(() => {
     getOrderHistory().then((history) => {
-      setOrderHistory(history);
+      if (history) setOrderHistory(history);
     });
   }, []);
 
