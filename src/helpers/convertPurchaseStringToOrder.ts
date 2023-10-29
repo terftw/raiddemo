@@ -11,7 +11,7 @@ export const convertPurchaseStringToOrder = (
     .map(([name, quantity]) => {
       return { name: name, quantity: Number(quantity) } as Order;
     })
-    .filter(({ quantity }) => !isNaN(quantity));
+    .filter(({ quantity }) => !isNaN(quantity) && quantity > 0);
 
   return orders;
 };
